@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textview_marginStart">16dp</dimen>
+    <dimen name="airhumidity_height">30dp</dimen>
+    <dimen name="layout_marginTop">4dp</dimen>
+    <dimen name="title_textsize">17dp</dimen>
+    <dimen name="big_textsize">100dp</dimen>
+    <dimen name="big_layoutsize">192dp</dimen>
+</resources>
