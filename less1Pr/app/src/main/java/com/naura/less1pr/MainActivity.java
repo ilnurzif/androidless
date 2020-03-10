@@ -19,17 +19,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-     //   setContentView(R.layout.layoutnight);
-
-  //  AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode());
-//   recreate();
-
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       getSupportActionBar().setTitle(R.string.theather);
-       toolbar.setSubtitle(R.string.moscow);
+        getSupportActionBar().setTitle(R.string.theather);
+        toolbar.setSubtitle(R.string.moscow);
 
         initVisual();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.weekdays);
@@ -38,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
   }
 
     private void initVisual() {
-        theatherDays.add(new TheatherDay("19 ","чт",R.drawable.kweather));
-        theatherDays.add(new TheatherDay("10","пт",R.drawable.kweather));
-        theatherDays.add(new TheatherDay("11","сб",R.drawable.kweather));
+        theatherDays.add(new TheatherDay("19°",getString(R.string.Monday) ,R.drawable.kweather));
+        theatherDays.add(new TheatherDay("10°",getString(R.string.Thursday),R.drawable.kweather));
+        theatherDays.add(new TheatherDay("11°",getString(R.string.Tuesday),R.drawable.kweather));
     }
 }

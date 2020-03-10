@@ -33,8 +33,6 @@ public class TheatherWeekAdapter  extends RecyclerView.Adapter<TheatherWeekAdapt
         holder.weatherView.setImageResource(theatherDay.getTheathericon());
          holder.temperatureView.setText(theatherDay.getTemperature());
          holder.weekdayView.setText(theatherDay.getWeekday());
-      //  holder.temperatureView.setText("dedewd");
-      //  holder.weekdayView.setText("ergerger");
     }
 
     @Override

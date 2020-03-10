@@ -1,16 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/moscowland"
+    android:background="@drawable/cityhorizont5"
     tools:context=".MainActivity">
-
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/Toolbar"/>
+
+    <TextView
+        android:id="@+id/BigTemperatureTextView"
+        android:layout_width="@dimen/title_layout_width"
+        android:layout_height="@dimen/bottom_layoutheight"
+        android:layout_marginStart="@dimen/textview_marginStart"
+        android:text="10°"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/big_textsize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/airhumidityTextView" />
+
+    <TextView
+        android:id="@+id/gridtextView"
+        android:layout_width="@dimen/right_layout_width"
+        android:layout_height="@dimen/title_layout_height"
+        android:layout_marginStart="@dimen/textview_marginStart"
+        android:layout_marginTop="@dimen/textview_marginStart"
+        android:text="@string/weekforecast"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/title_textsize"
+        app:layout_constraintStart_toEndOf="@+id/airhumidityTextView"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/airhumidityTextView"
+        android:layout_width="@dimen/title_layout_width"
+        android:layout_height="@dimen/title_layout_height"
+        android:layout_marginTop="@dimen/textview_marginStart"
+        android:layout_marginLeft="@dimen/textview_marginStart"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/airhumidity"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/title_textsize"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/weekdays"
+        android:layout_width="@dimen/right_layout_width"
+        android:layout_height="@dimen/bottom_layoutheight"
+        android:layout_marginStart="@dimen/textview_marginStart"
+        android:layout_marginTop="@dimen/textview_marginStart"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorAlpha"
+        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+        app:layout_constraintStart_toEndOf="@+id/BigTemperatureTextView"
+        app:layout_constraintTop_toBottomOf="@+id/gridtextView" />
 
 </android.support.constraint.ConstraintLayout>

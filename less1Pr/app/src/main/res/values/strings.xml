@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">less1Pr</string>
-    <string name="airhumidity">Влажность</string>
-    <string name="theather">Погода</string>
-    <string name="weekforecast">Прогноз на три дня</string>
-    <string name="moscow">Москва</string>
-    <string name="Monday">пн</string>
-    <string name="Tuesday">вт</string>
-    <string name="Wednesday">ср</string>
-    <string name="Thursday">чт</string>
-    <string name="Saturday">пт</string>
-    <string name="Sunday">сб</string>
+    <string name="airhumidity">airhumidity</string>
+    <string name="theather">theather</string>
+    <string name="weekforecast">weekforecast</string>
+    <string name="moscow">moscow</string>
+    <string name="Monday">mn</string>
+    <string name="Tuesday">tu</string>
+    <string name="Wednesday">wed</string>
+    <string name="Thursday">thu</string>
+    <string name="Saturday">sat</string>
+    <string name="Sunday">sun</string>
 </resources>
