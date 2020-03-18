@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText selectCityEditText;
     TheatherViewSetting theatherViewSetting;
     private static final String theatherSettingState = "theatherSettingState";
-    private TheatherObservable theatherObservable;
+    private StateObservable theatherObservable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initObserver() {
-        theatherObservable = new TheatherObservable();
+        theatherObservable = new StateObservable();
         theatherObservable.registerObserver(new ShowMsgObserver());
         theatherObservable.registerObserver(new LogMsgObserver());
     }

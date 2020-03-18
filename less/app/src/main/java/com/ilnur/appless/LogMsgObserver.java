@@ -3,7 +3,7 @@ package com.ilnur.appless;
 import android.content.Context;
 import android.util.Log;
 
-public class LogMsgObserver implements TheatherObserver {
+public class LogMsgObserver implements SaveObserver {
     private static final String Tag = "Debug";
 
     @Override

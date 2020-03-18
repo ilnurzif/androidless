@@ -32,29 +32,31 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center|bottom"
-        android:orientation="vertical" >
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/textPropTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/title_textsize"
             android:layout_margin="@dimen/titlemargin"
-            android:text="@string/searchviewsettingtitle" />
+            android:text="@string/searchviewsettingtitle"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/title_textsize" />
+
         <CheckBox
             android:id="@+id/windspeedCheckBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:text="@string/windspeedtext" />
+            android:text="@string/windspeedtext"
+            android:textColor="@color/colorWhite" />
 
         <CheckBox
             android:id="@+id/pressureCheckBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:text="@string/pressure"/>
+            android:text="@string/pressure"
+            android:textColor="@color/colorWhite" />
     </LinearLayout>
-  </LinearLayout>
+</LinearLayout>
 
 
