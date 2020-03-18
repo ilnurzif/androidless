@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textview_marginStart">16dp</dimen>
+    <dimen name="airhumidity_height">30dp</dimen>
+    <dimen name="layout_marginTop">4dp</dimen>
+    <dimen name="title_layout_width">200dp</dimen>
+    <dimen name="title_layout_height">27dp</dimen>
+    <dimen name="big_layoutsize">192dp</dimen>
+    <dimen name="bottom_layoutheight">286dp</dimen>
+    <dimen name="right_layout_width">300dp</dimen>
+    <dimen name="editborder">2dp</dimen>
+    <dimen name="editmargin">4dp</dimen>
+    <dimen name="editimagesize">16dp</dimen>
+    <dimen name="titlemargin">8dp</dimen>
+    <dimen name="cityslistheight">320dp</dimen>
+
+    <dimen name="title_textsize">17sp</dimen>
+    <dimen name="big_textsize">100sp</dimen>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/linearLayoutSearch"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlack"
+        tools:context=".MainActivity">
+
+        <EditText
+            android:id="@+id/selectCityEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@android:drawable/ic_menu_search"
+            android:hint="@string/entercity"
+            android:inputType="textPersonName"
+            android:text=""
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            android:autofillHints="" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/editmargin" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textPropTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/titlemargin"
+            android:text="@string/searchviewsettingtitle"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/title_textsize" />
+
+        <CheckBox
+            android:id="@+id/windspeedCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/windspeedtext"
+            android:textColor="@color/colorWhite" />
+
+        <CheckBox
+            android:id="@+id/pressureCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pressure"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+</LinearLayout>
+
+

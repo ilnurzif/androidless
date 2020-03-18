@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">less1Pr</string>
+    <string name="airhumidity">Влажность</string>
+    <string name="theather">Погода</string>
+    <string name="weekforecast">Прогноз на три дня</string>
+    <string name="moscow">Москва</string>
+    <string name="Monday">пн</string>
+    <string name="Tuesday">вт</string>
+    <string name="Wednesday">ср</string>
+    <string name="Thursday">чт</string>
+    <string name="Saturday">пт</string>
+    <string name="Sunday">сб</string>
+    <string name="entercity">"Введите название города"</string>
+    <string name="searchviewsettingtitle">Настройки отображения</string>
+    <string name="windspeedtext">Скорость ветра</string>
+    <string name="pressure">Давление</string>
+    <string name="findcity">Найти город</string>
+    <string name="appsettigstitle">Настройки приложения</string>
+    <string name="applang">Язык интерфейса</string>
+    <string name="themetitle">Темная тема</string>
+</resources>
