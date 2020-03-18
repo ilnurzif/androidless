@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText selectCityEditText;
     TheatherViewSetting theatherViewSetting;
     private static final String theatherSettingState = "theatherSettingState";
-    private StateObservable theatherObservable;
+    private StateObservable stateObservable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.city_choice);
         initVisual();
         initObserver();
-        theatherObservable.notifyObserver(this, "onCreate");
+        stateObservable.notifyObserver(this, "onCreate");
     }
 
     private void initVisual() {
@@ -30,53 +30,53 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initObserver() {
-        theatherObservable = new StateObservable();
-        theatherObservable.registerObserver(new ShowMsgObserver());
-        theatherObservable.registerObserver(new LogMsgObserver());
+        stateObservable = new StateObservable();
+        stateObservable.registerObserver(new ShowMsgObserver());
+        stateObservable.registerObserver(new LogMsgObserver());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        theatherObservable.notifyObserver(this, "onStart");
+        stateObservable.notifyObserver(this, "onStart");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        theatherObservable.notifyObserver(this, "onStop");
+        stateObservable.notifyObserver(this, "onStop");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        theatherObservable.notifyObserver(this, "onDestroy");
+        stateObservable.notifyObserver(this, "onDestroy");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        theatherObservable.notifyObserver(this, "onResume");
+        stateObservable.notifyObserver(this, "onResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        theatherObservable.notifyObserver(this, "onPause");
+        stateObservable.notifyObserver(this, "onPause");
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putSerializable(theatherSettingState, saveState());
         super.onSaveInstanceState(outState);
-        theatherObservable.notifyObserver(this, "onSaveInstanceState");
+        stateObservable.notifyObserver(this, "onSaveInstanceState");
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         restoreState((TheatherViewSetting) savedInstanceState.getSerializable(theatherSettingState));
-        theatherObservable.notifyObserver(this, "onRestoreInstanceState");
+        stateObservable.notifyObserver(this, "onRestoreInstanceState");
     }
 
     private void restoreState(TheatherViewSetting theatherViewSetting) {
