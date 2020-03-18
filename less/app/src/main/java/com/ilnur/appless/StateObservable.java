@@ -6,18 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StateObservable {
-    private List<SaveObserver> theatherList = new ArrayList<>();
+    private List<StateObserver> theatherList = new ArrayList<>();
 
-    public void registerObserver(SaveObserver theatherObserver) {
+    public void registerObserver(StateObserver theatherObserver) {
         theatherList.add(theatherObserver);
     }
 
-    public void deleteObserver(SaveObserver theatherObserver) {
+    public void deleteObserver(StateObserver theatherObserver) {
         theatherList.remove(theatherObserver);
     }
 
     public void notifyObserver(Context context, String msg) {
-        for (SaveObserver theatherObserver : theatherList) {
+        for (StateObserver theatherObserver : theatherList) {
             theatherObserver.update(context, msg);
         }
     }

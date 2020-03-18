@@ -2,6 +2,6 @@ package com.ilnur.appless;
 
 import android.content.Context;
 
-interface SaveObserver {
+interface StateObserver {
     public void update(Context context, String msg);
 }
