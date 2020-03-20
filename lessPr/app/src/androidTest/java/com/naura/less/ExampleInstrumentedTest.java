@@ -1,4 +1,4 @@
-package com.naura.less1pr;
+package com.naura.less;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

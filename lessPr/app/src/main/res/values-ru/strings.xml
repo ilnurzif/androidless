@@ -18,4 +18,5 @@
     <string name="appsettigstitle">Настройки приложения</string>
     <string name="applang">Язык интерфейса</string>
     <string name="themetitle">Темная тема</string>
+    <string name="title_activity_city_list">Выбрать город</string>
 </resources>

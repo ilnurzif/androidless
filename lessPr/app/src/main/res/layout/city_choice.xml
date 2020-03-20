@@ -1,62 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayoutSearch"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlack">
-
-    <LinearLayout
-        android:id="@+id/linearLayoutSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/editmargin"
-        android:background="@drawable/edittextstyle"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+    android:layout_margin="@dimen/editmargin"
+    android:orientation="vertical">
 
         <EditText
             android:id="@+id/editTextSearh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:drawableEnd="@android:drawable/ic_menu_search"
             android:hint="@string/entercity"
             android:inputType="textPersonName"
-            android:text=""
-            android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorWhite"
-            android:autofillHints="" />
-    </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/cityslistheight"
-        android:layout_marginBottom="@dimen/titlemargin"
-        android:layout_marginTop="@dimen/titlemargin"
-        android:layout_margin="@dimen/editmargin"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutSettings"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutSearch">
+            android:text=""/>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/citiesRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/editmargin" />
-    </ScrollView>
+            android:layout_margin="@dimen/editmargin"
+            android:layout_weight="5"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 
     <LinearLayout
         android:id="@+id/linearLayoutSettings"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:layout_margin="@dimen/editmargin"
+        android:layout_gravity="bottom"
         android:background="@drawable/edittextstyle"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical">
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
             android:textSize="@dimen/title_textsize"
             android:layout_margin="@dimen/titlemargin"
             android:text="@string/searchviewsettingtitle" />
@@ -64,14 +46,12 @@
             android:id="@+id/checkBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
             android:text="@string/windspeedtext" />
         <CheckBox
             android:id="@+id/checkBox2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
             android:text="@string/pressure" />
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

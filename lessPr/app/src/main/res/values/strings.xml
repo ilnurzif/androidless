@@ -18,4 +18,5 @@
     <string name="appsettigstitle">App settings</string>
     <string name="applang">App lang</string>
     <string name="themetitle">Dark theme</string>
+    <string name="title_activity_city_list">Select city</string>
 </resources>

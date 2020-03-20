@@ -1,4 +1,4 @@
-package com.naura.less1pr;
+package com.naura.less.theatherdata;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,13 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.naura.less.R;
+
 import java.util.List;
 
 public class TheatherWeekAdapter  extends RecyclerView.Adapter<TheatherWeekAdapter.ViewHolder>  {
-   private List<TheatherDay> theatherdays;
+   private List<TheatherData> theatherdays;
     private LayoutInflater inflater;
 
-    public TheatherWeekAdapter(Context context, List<TheatherDay> theatherdays) {
+    public TheatherWeekAdapter(Context context, List<TheatherData> theatherdays) {
         this.theatherdays = theatherdays;
         this.inflater=LayoutInflater.from(context);
     }
@@ -29,10 +31,10 @@ public class TheatherWeekAdapter  extends RecyclerView.Adapter<TheatherWeekAdapt
 
     @Override
     public void onBindViewHolder(@NonNull TheatherWeekAdapter.ViewHolder holder, int position) {
-        TheatherDay theatherDay=theatherdays.get(position);
+        TheatherData theatherDay=theatherdays.get(position);
         holder.weatherView.setImageResource(theatherDay.getTheathericon());
-         holder.temperatureView.setText(theatherDay.getTemperature());
-         holder.weekdayView.setText(theatherDay.getWeekday());
+        holder.temperatureView.setText(theatherDay.getTemperature());
+        holder.weekdayView.setText(theatherDay.getWeekday());
     }
 
     @Override

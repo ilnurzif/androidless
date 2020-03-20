@@ -1,4 +1,4 @@
-package com.naura.less1pr;
+package com.naura.less;
 
 import org.junit.Test;
 
