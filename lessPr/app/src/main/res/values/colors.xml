@@ -8,4 +8,5 @@
     <color name="colorWhite">#eef7f7</color>
     <color name="colorGrid">#62eef7f7</color>
     <color name="colorBlack">#D80A0B0B</color>
+    <color name="colorBlackFone">#9A0A0B0B</color>
 </resources>

@@ -13,25 +13,25 @@ import com.naura.less.R;
 
 import java.util.List;
 
-public class TheatherWeekAdapter  extends RecyclerView.Adapter<TheatherWeekAdapter.ViewHolder>  {
-   private List<TheatherData> theatherdays;
+public class TheatherWeekAdapter extends RecyclerView.Adapter<TheatherWeekAdapter.ViewHolder> {
+    private List<TheatherData> theatherdays;
     private LayoutInflater inflater;
 
     public TheatherWeekAdapter(Context context, List<TheatherData> theatherdays) {
         this.theatherdays = theatherdays;
-        this.inflater=LayoutInflater.from(context);
+        this.inflater = LayoutInflater.from(context);
     }
 
     @NonNull
     @Override
     public TheatherWeekAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.list_item,parent,false);
+        View view = inflater.inflate(R.layout.list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TheatherWeekAdapter.ViewHolder holder, int position) {
-        TheatherData theatherDay=theatherdays.get(position);
+        TheatherData theatherDay = theatherdays.get(position);
         holder.weatherView.setImageResource(theatherDay.getTheathericon());
         holder.temperatureView.setText(theatherDay.getTemperature());
         holder.weekdayView.setText(theatherDay.getWeekday());
@@ -45,9 +45,10 @@ public class TheatherWeekAdapter  extends RecyclerView.Adapter<TheatherWeekAdapt
     public class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView weatherView;
         final TextView weekdayView, temperatureView;
-        ViewHolder(View view){
+
+        ViewHolder(View view) {
             super(view);
-            weatherView = (ImageView)view.findViewById(R.id.weathericon);
+            weatherView = (ImageView) view.findViewById(R.id.weathericon);
             weekdayView = (TextView) view.findViewById(R.id.weekday);
             temperatureView = (TextView) view.findViewById(R.id.temperature);
         }

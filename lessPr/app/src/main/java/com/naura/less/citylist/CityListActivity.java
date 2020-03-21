@@ -14,6 +14,7 @@ import java.util.List;
 
 public class CityListActivity extends AppCompatActivity {
     private List<CityData> citylist;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,40 +23,17 @@ public class CityListActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initVisual();
+        dataload();
     }
 
     private void initVisual() {
         citylist = new ArrayList<>();
-        dataload();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.citiesRecyclerView);
-        CityListAdapter adapter = new CityListAdapter(this, citylist);
-        recyclerView.setAdapter(adapter);
+        recyclerView = (RecyclerView) findViewById(R.id.citiesRecyclerView);
     }
 
     private void dataload() {
-        List<TheatherData> moscowTheatherList = new ArrayList<>();
-        moscowTheatherList.add(new TheatherData("10°", getString(R.string.Monday), R.drawable.kweather));
-        moscowTheatherList.add(new TheatherData("13°", getString(R.string.Thursday), R.drawable.kweather));
-        moscowTheatherList.add(new TheatherData("17°", getString(R.string.Saturday), R.drawable.kweather));
-
-        citylist.add(new CityData("Moscow",
-                ResToBitmap(R.drawable.moscowsity),
-                ResToBitmap(R.drawable.moscowhorizont),
-                ResToBitmap(R.drawable.kweather)));
-
-        List<TheatherData> kazanTheatherList = new ArrayList<>();
-        kazanTheatherList.add(new TheatherData("17°", getString(R.string.Monday), R.drawable.kweather));
-        kazanTheatherList.add(new TheatherData("16", getString(R.string.Thursday), R.drawable.kweather));
-        kazanTheatherList.add(new TheatherData("17°", getString(R.string.Saturday), R.drawable.kweather));
-
-        citylist.add(new CityData("Kazan",
-                ResToBitmap(R.drawable.moscowsity),
-                ResToBitmap(R.drawable.moscowhorizont),
-                ResToBitmap(R.drawable.kweather)));
+        citylist = CityLoader.getCityList(this);
+        CityListAdapter adapter = new CityListAdapter(this, citylist);
+        recyclerView.setAdapter(adapter);
     }
-
-    private Bitmap ResToBitmap(int resid) {
-        return BitmapFactory.decodeResource(CityListActivity.this.getResources(), resid);
-    }
-
 }

@@ -19,4 +19,6 @@
     <string name="applang">App lang</string>
     <string name="themetitle">Dark theme</string>
     <string name="title_activity_city_list">Select city</string>
+    <string name="Moscow">Moscow</string>
+    <string name="Kazan">Kazan</string>
 </resources>

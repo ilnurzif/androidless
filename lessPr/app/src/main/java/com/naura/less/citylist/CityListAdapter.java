@@ -65,19 +65,8 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     Intent intentcity = new Intent(context, MainActivity.class);
-                //    intentcity.putExtra("cityname",cityNameTextView.getText().toString());
-                  //
-                     CityData cityData=citydatalist.get(0);
-                  //  Toast.makeText(context, cityData.getName() ,Toast.LENGTH_LONG).show();
-//                    CityData cityData=
-//                    new CityData("Kazan",
-//                            null,
-//                            null,
-//                           null,
-//                           null);
+                    intentcity.putExtra("cityname", cityNameTextView.getText().toString());
                     Activity activity = (Activity) context;
-                    intentcity.putExtra("city", cityData);
-                   // activity.startActivity(intentcity);
                     activity.setResult(activity.RESULT_OK, intentcity);
                     activity.finish();
                 }
