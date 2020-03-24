@@ -1,4 +1,4 @@
-package com.naura.less.citylist;
+package com.naura.less.citydetail;
 
 import android.content.Context;
 import android.content.Intent;

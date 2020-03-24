@@ -13,10 +13,13 @@
             android:name="com.naura.less.citylist.CityListActivity"
             android:label="@string/title_activity_city_list">
         </activity>
+        <activity
+            android:name="com.naura.less.citydetail.CityDetailActivity"
+            android:label="@string/title_activity_city_list">
+        </activity>
         <activity android:name="com.naura.less.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

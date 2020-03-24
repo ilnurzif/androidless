@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.naura.less.R;
+import com.naura.less.citydetail.CityData;
 import com.naura.less.theatherdata.TheatherData;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class CityLoader {
                 moscowTheatherList,
                 ResToBitmap(context, R.drawable.moscowsity),
                 ResToBitmap(context, R.drawable.moscowhorizont),
-                ResToBitmap(context, R.drawable.kweather),
+                ResToBitmap(context, R.drawable.kazan_small),
                 "https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0"));
 
         List<TheatherData> kazanTheatherList = new ArrayList<>();
