@@ -9,20 +9,15 @@ import com.naura.less.theatherdata.TheatherData;
 
 import java.util.List;
 
-
 public class CityData {
     private String name;
-    private List<TheatherData> theatherdays;
+    private List<TheatherData> theatherDays;
     private Bitmap verticalImage;
     private Bitmap horisontalImage;
     private Bitmap smallImage;
     private String infoUrl;
 
-    public Bitmap getSmallImage() {
-        return smallImage;
-    }
-
-    public CityData(String name, List<TheatherData> theatherdays,
+    public CityData(String name, List<TheatherData> theatherDays,
                     Bitmap verticalImage,
                     Bitmap horisontalImage,
                     Bitmap smallImage,
@@ -31,18 +26,22 @@ public class CityData {
         this.name = name;
         this.verticalImage = verticalImage;
         this.horisontalImage = horisontalImage;
-        this.theatherdays = theatherdays;
+        this.theatherDays = theatherDays;
         this.smallImage = smallImage;
         this.infoUrl = infoUrl;
     }
 
+    public Bitmap getSmallImage() {
+        return smallImage;
+    }
+
     public int getTemperatureNow() {
-        String st = theatherdays.get(0).getTemperature();
+        String st = theatherDays.get(0).getTemperature();
         return Integer.parseInt(st);
     }
 
     public int getAirhumidityNow() {
-        String st = theatherdays.get(0).getAirhumidity();
+        String st = theatherDays.get(0).getAirhumidity();
         return Integer.parseInt(st);
     }
 
@@ -50,8 +49,8 @@ public class CityData {
         return name;
     }
 
-    public List<TheatherData> getTheatherdays() {
-        return theatherdays;
+    public List<TheatherData> getTheatherDays() {
+        return theatherDays;
     }
 
     public Bitmap getVerticalImage() {
@@ -64,7 +63,7 @@ public class CityData {
 
     public void openInfo(Context context) {
         Uri uri = Uri.parse(infoUrl);
-        Intent browserintent = new Intent(Intent.ACTION_VIEW, uri);
-        context.startActivity(browserintent);
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
+        context.startActivity(browserIntent);
     }
 }

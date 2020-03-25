@@ -41,7 +41,7 @@ public class TheatherData implements Serializable {
         this.weekday = weekday;
     }
 
-    public void setTheathericon(int theathericon) {
-        this.theathericon = theathericon;
+    public void setTheatherIcon(int theatherIcon) {
+        this.theathericon = theatherIcon;
     }
 }

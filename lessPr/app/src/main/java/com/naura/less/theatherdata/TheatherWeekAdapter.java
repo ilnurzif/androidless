@@ -15,11 +15,11 @@ import com.naura.less.R;
 import java.util.List;
 
 public class TheatherWeekAdapter extends RecyclerView.Adapter<TheatherWeekAdapter.ViewHolder> {
-    private List<TheatherData> theatherdays;
+    private List<TheatherData> theatherDays;
     private LayoutInflater inflater;
 
     public TheatherWeekAdapter(Context context, List<TheatherData> theatherdays) {
-        this.theatherdays = theatherdays;
+        this.theatherDays = theatherdays;
         this.inflater = LayoutInflater.from(context);
     }
 
@@ -32,7 +32,7 @@ public class TheatherWeekAdapter extends RecyclerView.Adapter<TheatherWeekAdapte
 
     @Override
     public void onBindViewHolder(@NonNull TheatherWeekAdapter.ViewHolder holder, int position) {
-        TheatherData theatherDay = theatherdays.get(position);
+        TheatherData theatherDay = theatherDays.get(position);
         holder.weatherView.setImageResource(theatherDay.getTheathericon());
         holder.temperatureView.setText(theatherDay.getTemperature());
         holder.weekdayView.setText(theatherDay.getWeekday());
@@ -40,7 +40,7 @@ public class TheatherWeekAdapter extends RecyclerView.Adapter<TheatherWeekAdapte
 
     @Override
     public int getItemCount() {
-        return theatherdays.size();
+        return theatherDays.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

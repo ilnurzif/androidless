@@ -12,8 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naura.less.R;
-import com.naura.less.basecode.Observable;
-import com.naura.less.basecode.Observer;
+import com.naura.less.observercode.EventsConst;
+import com.naura.less.observercode.Observable;
+import com.naura.less.observercode.Observer;
 import com.naura.less.citylist.CityLoader;
 import com.naura.less.theatherdata.TheatherData;
 import com.naura.less.theatherdata.TheatherWeekAdapter;
@@ -23,8 +24,8 @@ import java.util.List;
 
 public class CityDetailFragment extends Fragment implements Observer {
     private RecyclerView recyclerView;
-    private TextView temperaturetextView;
-    private TextView airhumiditytextView;
+    private TextView temperatureTextView;
+    private TextView airhumidityTextView;
     private List<TheatherData> theatherDays = new ArrayList<>();
     private TheatherWeekAdapter adapter;
 
@@ -38,35 +39,39 @@ public class CityDetailFragment extends Fragment implements Observer {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
-        Observable observable=Observable.getInstance();
-        observable.subscribe(this);
-        dataload(CityLoader.getDefaultCityName(getActivity()));
+        dataLoad(CityLoader.getDefaultCityName(getActivity()));
     }
 
     private void initViews(View view) {
         recyclerView = view.findViewById(R.id.weekdays);
-        temperaturetextView = view.findViewById(R.id.temperaturetextView);
-        airhumiditytextView = view.findViewById(R.id.airhumiditytextView);
+        temperatureTextView = view.findViewById(R.id.temperaturetextView);
+        airhumidityTextView = view.findViewById(R.id.airhumiditytextView);
+
+        Observable observable = Observable.getInstance();
+        observable.subscribe(this);
     }
 
-    private void dataload(String cityname) {
-        theatherDays = CityLoader.getTheatherData(getActivity(), cityname);
+    private void dataLoad(String cityName) {
+        theatherDays = CityLoader.getTheatherData(getActivity(), cityName);
         adapter = new TheatherWeekAdapter(getActivity(), theatherDays);
         recyclerView.setAdapter(adapter);
-        CityData cityData = CityLoader.getCity(getActivity(), cityname);
-        if (cityData == null)
-            throw new NullPointerException("city " + cityname + " not found");
-        CityLoader.setDefaultCityName(cityname);
 
-        temperaturetextView.setText(cityData.getTemperatureNow() + "°");
-        airhumiditytextView.setText(getResources().getText(R.string.airhumidity)+" "
-                +cityData.getAirhumidityNow() + " %");
+        CityData cityData = CityLoader.getCity(getActivity(), cityName);
+        if (cityData == null)
+            throw new NullPointerException("city " + cityName + " not found");
+        CityLoader.setDefaultCityName(cityName);
+
+        String temperatureNow = cityData.getTemperatureNow() + "°";
+        String airhumidity = getResources().getText(R.string.airhumidity) + " " + cityData.getAirhumidityNow() + " %";
+
+        temperatureTextView.setText(temperatureNow);
+        airhumidityTextView.setText(airhumidity);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-     }
+    }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -75,10 +80,10 @@ public class CityDetailFragment extends Fragment implements Observer {
 
     @Override
     public <T> void update(String eventName, T val) {
-       if (eventName.equals("selectcityevent")) {
-           CityLoader.setDefaultCityName((String) val);
-         if (getActivity()==null) return;
-            dataload(CityLoader.getDefaultCityName(getActivity()));
-       }
+        if (eventName.equals(EventsConst.selectCityEvent)) {
+            CityLoader.setDefaultCityName((String) val);
+            if (getActivity() == null) return;
+            dataLoad(CityLoader.getDefaultCityName(getActivity()));
+        }
     }
 }

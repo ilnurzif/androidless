@@ -65,7 +65,7 @@ public class CityLoader {
 
     public static List<TheatherData> getTheatherData(Context context, String cityname) {
         CityData cityData = getCity(context, cityname);
-        return (cityData == null) ? null : cityData.getTheatherdays();
+        return (cityData == null) ? null : cityData.getTheatherDays();
     }
 
     public static List<CityData> getCityList(Context context) {

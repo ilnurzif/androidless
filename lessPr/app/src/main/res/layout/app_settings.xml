@@ -10,7 +10,7 @@
             android:layout_margin="@dimen/editborder"
             android:layout_height="wrap_content"
             android:text="@string/appsettigstitle"
-            android:gravity="left"
+            android:gravity="start"
             android:textColor="@color/colorWhite"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_span="2"
@@ -33,7 +33,7 @@
             android:layout_margin="@dimen/editborder"
             android:layout_height="wrap_content"
             android:text="@string/applang"
-            android:gravity="left"
+            android:gravity="start"
             android:textColor="@color/colorWhite"
             android:textAppearance="?android:attr/textAppearanceLarge"
             />

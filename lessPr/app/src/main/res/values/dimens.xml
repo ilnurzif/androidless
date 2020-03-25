@@ -17,4 +17,6 @@
     <dimen name="title_textsize">12sp</dimen>
     <dimen name="big_textsize">90sp</dimen>
     <dimen name="text_margin">16dp</dimen>
+
+    <dimen name="border_margin">2dp</dimen>
 </resources>
