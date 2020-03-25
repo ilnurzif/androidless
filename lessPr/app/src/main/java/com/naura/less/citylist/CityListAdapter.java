@@ -3,6 +3,7 @@ package com.naura.less.citylist;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +14,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naura.less.R;
+import com.naura.less.basecode.Observable;
 import com.naura.less.citydetail.CityData;
 import com.naura.less.citydetail.CityDetailActivity;
 
 import java.util.List;
 
-
 public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHolder> {
     private List<CityData> citydatalist;
     private LayoutInflater layoutInflater;
     private Context context;
-    private int cityselectid=2345;
+    private Observable observable = Observable.getInstance();
 
     public CityListAdapter(Context context, List<CityData> citydatalist) {
         this.citydatalist = citydatalist;
@@ -55,9 +56,15 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
         return super.getItemId(position);
     }
 
-    private void openCityList(Activity activity, int cityselectid) {
+    private void openCityList(Activity activity, String cityname) {
+        CityLoader.setDefaultCityName(cityname);
+        observable.notify("selectcityevent", cityname);
+        if (activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            return;
+        }
         Intent intentcity = new Intent(activity, CityDetailActivity.class);
-        activity.startActivityForResult(intentcity, cityselectid);
+        intentcity.putExtra("cityname", cityname);
+        activity.startActivity(intentcity);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -66,18 +73,13 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
 
         ViewHolder(View view) {
             super(view);
-             cityNameTextView = (TextView) view.findViewById(R.id.cityNameTextView);
-             citySmallimageView = (ImageView) view.findViewById(R.id.citySmallimageView);
-
+            cityNameTextView = (TextView) view.findViewById(R.id.cityNameTextView);
+            citySmallimageView = (ImageView) view.findViewById(R.id.citySmallimageView);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   //Intent intentcity = new Intent(context, MainActivity.class);
-                    // intentcity.putExtra("cityname", cityNameTextView.getText().toString());
-                     Activity activity = (Activity) context;
-                     openCityList(activity,cityselectid);
-                   //  activity.setResult(activity.RESULT_OK, intentcity);
-                   //  activity.finish();
+                    Activity activity = (Activity) context;
+                    openCityList(activity, cityNameTextView.getText().toString());
                 }
             });
         }

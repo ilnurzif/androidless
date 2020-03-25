@@ -14,7 +14,7 @@
     <dimen name="titlemargin">8dp</dimen>
     <dimen name="cityslistheight">700dp</dimen>
 
-    <dimen name="title_textsize">17sp</dimen>
-    <dimen name="big_textsize">100sp</dimen>
+    <dimen name="title_textsize">12sp</dimen>
+    <dimen name="big_textsize">90sp</dimen>
     <dimen name="text_margin">16dp</dimen>
 </resources>

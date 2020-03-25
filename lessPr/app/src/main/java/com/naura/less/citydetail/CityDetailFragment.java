@@ -1,6 +1,5 @@
 package com.naura.less.citydetail;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naura.less.R;
+import com.naura.less.basecode.Observable;
+import com.naura.less.basecode.Observer;
 import com.naura.less.citylist.CityLoader;
 import com.naura.less.theatherdata.TheatherData;
 import com.naura.less.theatherdata.TheatherWeekAdapter;
@@ -20,7 +21,7 @@ import com.naura.less.theatherdata.TheatherWeekAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CityDetailFragment extends Fragment {
+public class CityDetailFragment extends Fragment implements Observer {
     private RecyclerView recyclerView;
     private TextView temperaturetextView;
     private TextView airhumiditytextView;
@@ -30,7 +31,6 @@ public class CityDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-      //  return super.onCreateView(inflater, container, savedInstanceState);
         return inflater.inflate(R.layout.city_detail_fragment, container, false);
     }
 
@@ -38,6 +38,8 @@ public class CityDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+        Observable observable=Observable.getInstance();
+        observable.subscribe(this);
         dataload(CityLoader.getDefaultCityName(getActivity()));
     }
 
@@ -64,13 +66,19 @@ public class CityDetailFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-      if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-
-      }
-    }
+     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public <T> void update(String eventName, T val) {
+       if (eventName.equals("selectcityevent")) {
+           CityLoader.setDefaultCityName((String) val);
+         if (getActivity()==null) return;
+            dataload(CityLoader.getDefaultCityName(getActivity()));
+       }
     }
 }

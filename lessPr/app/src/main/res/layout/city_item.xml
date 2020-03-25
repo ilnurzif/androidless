@@ -12,6 +12,8 @@
         android:id="@+id/cityNameTextView"
         android:layout_gravity="fill"
         android:text="TextView"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/colorWhite"
         android:layout_columnSpan="4"/>
 
     <ImageView
@@ -19,5 +21,6 @@
         android:layout_gravity="right"
          android:layout_height="25dp"
         android:layout_columnSpan="1"
+        android:layout_marginEnd="10dp"
         app:srcCompat="@drawable/kweather" />
 </GridLayout>

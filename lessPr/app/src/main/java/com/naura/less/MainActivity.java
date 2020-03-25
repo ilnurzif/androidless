@@ -3,19 +3,28 @@ package com.naura.less;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.Configuration;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.naura.less.basecode.Observable;
+import com.naura.less.basecode.Observer;
+import com.naura.less.citydetail.CityData;
+import com.naura.less.citylist.CityLoader;
 import com.naura.less.theatherdata.TheatherData;
 import com.naura.less.theatherdata.TheatherWeekAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Observer {
     private Toolbar toolbar;
     private RecyclerView recyclerView;
     private TheatherWeekAdapter adapter;
@@ -23,15 +32,17 @@ public class MainActivity extends AppCompatActivity {
     private static int cityselectid = 2345;
     private TextView temperaturetextView;
     private TextView airhumiditytextView;
-    private ConstraintLayout mainLayout;
+    private LinearLayout mainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     //   setContentView(R.layout.activity_main);
         setContentView(R.layout.city_choice);
-       initVisual();
-     //   dataload(CityLoader.getDefaultCityName(this));
+        initVisual();
+        dataload(CityLoader.getDefaultCityName(this));
+        Observable observable=Observable.getInstance();
+        observable.subscribe(this);
     }
 
    /* @Override
@@ -68,10 +79,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void initVisual() {
        toolbar = findViewById(R.id.toolbar);
-       setSupportActionBar(toolbar);
-       getSupportActionBar().setTitle(R.string.theather);
+    //   setSupportActionBar(toolbar);
+    //   getSupportActionBar().setTitle(R.string.theather);
        toolbar.setSubtitle(R.string.title_activity_city_list);
        mainLayout =findViewById(R.id.mainlayout);
+    }
+
+    @Override
+    public <T> void update(String eventName, T val) {
+        if (eventName.equals("selectcityevent")) {
+            dataload((String) val);
+        }
     }
 
   /*  @Override
@@ -82,14 +100,14 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-    private void dataload(String cityname) {
-   //     Drawable drawable= new BitmapDrawable(cityData.getVerticalImage());
-
-*//*     if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
-           mainLayout.setBackground(drawable);
+}*/
+        private void dataload(String cityName) {
+         toolbar.setSubtitle(cityName);
+         CityData cityData=CityLoader.getCity(this, cityName);
+         Drawable drawable= new BitmapDrawable(cityData.getVerticalImage());
+         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+            mainLayout.setBackground(drawable);
            else
-            mainLayout.setBackground(new BitmapDrawable(cityData.getHorisontalImage()));*//*
-          toolbar.setSubtitle(cityname);
-    }*/
-}
+            mainLayout.setBackground(new BitmapDrawable(cityData.getHorisontalImage()));
+        }
+    }

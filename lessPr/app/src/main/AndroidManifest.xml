@@ -10,10 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.naura.less.citylist.CityListActivity"
-            android:label="@string/title_activity_city_list">
-        </activity>
-        <activity
             android:name="com.naura.less.citydetail.CityDetailActivity"
             android:label="@string/title_activity_city_list">
         </activity>
@@ -24,5 +20,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
