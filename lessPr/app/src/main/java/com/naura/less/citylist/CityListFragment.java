@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naura.less.R;
@@ -41,6 +42,8 @@ public class CityListFragment extends Fragment {
     private void dataLoad() {
         cityList = CityLoader.getCityList(getActivity());
         CityListAdapter adapter = new CityListAdapter(getActivity(), cityList);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
     }
 }

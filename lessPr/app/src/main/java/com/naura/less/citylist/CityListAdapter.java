@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naura.less.R;
@@ -25,6 +26,7 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
     private List<CityData> cityDataList;
     private LayoutInflater layoutInflater;
     private Context context;
+    private int currentPosition=-1;
     private Observable observable = Observable.getInstance();
 
     public CityListAdapter(Context context, List<CityData> cityDataList) {
@@ -45,6 +47,8 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
         CityData cityData = cityDataList.get(position);
         holder.cityNameTextView.setText(cityData.getName());
         holder.citySmallImageView.setImageBitmap(cityData.getSmallImage());
+        SetOnClickHolder(holder, position);
+        repaintView(holder,position);
     }
 
     @Override
@@ -69,21 +73,35 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
         activity.startActivity(intentcity);
     }
 
+    private void SetOnClickHolder(@NonNull final ViewHolder  holder, final int position) {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.cityNameTextView = view.findViewById(R.id.cityNameTextView);
+                holder.citySmallImageView = view.findViewById(R.id.citySmallImageView);
+                currentPosition=position;
+                notifyDataSetChanged();
+                Activity activity = (Activity) context;
+                openCityList(activity, holder.cityNameTextView.getText().toString());
+            }
+        });
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView cityNameTextView;
-        private ImageView citySmallImageView;
+        TextView cityNameTextView;
+        ImageView citySmallImageView;
 
         ViewHolder(View view) {
             super(view);
             cityNameTextView = view.findViewById(R.id.cityNameTextView);
             citySmallImageView = view.findViewById(R.id.citySmallImageView);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Activity activity = (Activity) context;
-                    openCityList(activity, cityNameTextView.getText().toString());
-                }
-            });
         }
+    }
+
+    private void repaintView(@NonNull ViewHolder holder, int position) {
+       int color= ContextCompat.getColor(context, android.R.color.transparent);
+      if (currentPosition==position)
+        color= ContextCompat.getColor(context, R.color.colorPrimary);
+       holder.itemView.setBackgroundColor(color);
     }
 }

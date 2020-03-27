@@ -9,6 +9,5 @@
         android:id="@+id/citiesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        app:layoutManager="LinearLayoutManager"/>
+        android:layout_margin="5dp"/>
 </FrameLayout>
