@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class TheatherData implements Serializable {
     private String temperature;
     private String weekday;
-    private String pressure;
     private String airhumidity;
     private int theathericon;
 
@@ -21,7 +20,6 @@ public class TheatherData implements Serializable {
         this.temperature = temperature;
         this.weekday = weekday;
         this.theathericon = theathericon;
-        this.pressure = pressure;
         this.airhumidity = airhumidity;
     }
 

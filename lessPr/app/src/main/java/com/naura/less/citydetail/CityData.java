@@ -16,6 +16,15 @@ public class CityData {
     private Bitmap horisontalImage;
     private Bitmap smallImage;
     private String infoUrl;
+    private boolean favoriteCity = true;
+
+    public boolean isFavoriteCity() {
+        return favoriteCity;
+    }
+
+    public void setFavoriteCity(boolean favoriteCity) {
+        this.favoriteCity = favoriteCity;
+    }
 
     public CityData(String name, List<TheatherData> theatherDays,
                     Bitmap verticalImage,

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,11 +17,11 @@ import com.naura.less.observercode.EventsConst;
 import com.naura.less.observercode.Observable;
 import com.naura.less.observercode.Observer;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Inflater;
 
-public class CityListFragment extends Fragment implements Observer {
-    private List<CityData> cityList;
+public class CityListFavorFragment extends Fragment implements Observer {
+    private List<CityData> favorCityList;
     private RecyclerView recyclerView;
     private CityListAdapter cityListAdapter;
 
@@ -39,28 +38,27 @@ public class CityListFragment extends Fragment implements Observer {
         dataLoad();
     }
 
-    private void initVisual(View view) {
-        cityList = new ArrayList<>();
-        recyclerView = view.findViewById(R.id.citiesRecyclerView);
-    }
-
     private void dataLoad() {
         Observable observable = Observable.getInstance();
         observable.subscribe(this);
-        cityList = CityLoader.getCityList(getActivity());
-        cityListAdapter = new CityListAdapter(getActivity(), cityList, false);
+
+        favorCityList = CityLoader.getFavorCityList(getContext());
+        cityListAdapter = new CityListAdapter(getContext(), favorCityList, true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
-        itemDecoration.setDrawable(getActivity().getDrawable(R.drawable.separator));
-        recyclerView.addItemDecoration(itemDecoration);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(cityListAdapter);
+    }
+
+    private void initVisual(View view) {
+        recyclerView = view.findViewById(R.id.citiesRecyclerView);
+        recyclerView.setBackgroundColor(getContext().getResources().getColor(R.color.colorGrid));
     }
 
     @Override
     public <T> void update(String eventName, T val) {
         if (eventName.equals(EventsConst.likeSelectEvent)) {
-            cityListAdapter.setCityDataList(CityLoader.getCityList(getContext()));
+            cityListAdapter.setCityDataList(CityLoader.getFavorCityList(getContext()));
             cityListAdapter.notifyDataSetChanged();
         }
     }

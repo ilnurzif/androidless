@@ -21,4 +21,6 @@
     <string name="title_activity_city_list">Select city</string>
     <string name="Moscow">Moscow</string>
     <string name="Kazan">Kazan</string>
+    <string name="favorite_city_title">Избранные города</string>
+    <string name="all_city_title">Все города</string>
 </resources>

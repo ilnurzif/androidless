@@ -49,9 +49,9 @@ public class TheatherWeekAdapter extends RecyclerView.Adapter<TheatherWeekAdapte
 
         ViewHolder(View view) {
             super(view);
-            weatherView = (ImageView) view.findViewById(R.id.weathericon);
-            weekdayView = (TextView) view.findViewById(R.id.weekday);
-            temperatureView = (TextView) view.findViewById(R.id.temperature);
+            weatherView = view.findViewById(R.id.weathericon);
+            weekdayView = view.findViewById(R.id.weekday);
+            temperatureView = view.findViewById(R.id.temperature);
         }
     }
 }

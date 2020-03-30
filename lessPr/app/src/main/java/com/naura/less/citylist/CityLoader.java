@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CityLoader {
-    static private List<CityData> citylist;
+    static private List<CityData> cityList;
     static private String defaultCityName = "";
 
     private static void loaddata(Context context) {
@@ -23,7 +23,7 @@ public class CityLoader {
         moscowTheatherList.add(new TheatherData("13", "766", "33", context.getString(R.string.Thursday), R.drawable.kweather));
         moscowTheatherList.add(new TheatherData("17", "700", "56", context.getString(R.string.Saturday), R.drawable.kweather));
 
-        citylist.add(new CityData(context.getString(R.string.Moscow),
+        cityList.add(new CityData(context.getString(R.string.Moscow),
                 moscowTheatherList,
                 ResToBitmap(context, R.drawable.moscowsity),
                 ResToBitmap(context, R.drawable.moscowhorizont),
@@ -35,7 +35,7 @@ public class CityLoader {
         kazanTheatherList.add(new TheatherData("16", "666", "66", context.getString(R.string.Thursday), R.drawable.kweather));
         kazanTheatherList.add(new TheatherData("17", "744", "38", context.getString(R.string.Saturday), R.drawable.kweather));
 
-        citylist.add(new CityData(context.getString(R.string.Kazan),
+        cityList.add(new CityData(context.getString(R.string.Kazan),
                 kazanTheatherList,
                 ResToBitmap(context, R.drawable.kazanvertical),
                 ResToBitmap(context, R.drawable.kazanhorizontal),
@@ -48,16 +48,23 @@ public class CityLoader {
     }
 
     private static CityData findCity(String cityname) {
-        for (CityData cd : citylist) {
+        for (CityData cd : cityList) {
             if (cd.getName().equals(cityname))
                 return cd;
         }
         return null;
     }
 
+    public static void SetlikeCity(String cityName) {
+        for (CityData cityData : cityList) {
+            if (cityData.getName().equals(cityName))
+                cityData.setFavoriteCity(!cityData.isFavoriteCity());
+        }
+    }
+
     public static CityData getCity(Context context, String cityname) {
-        if (citylist == null) {
-            citylist = new ArrayList<>();
+        if (cityList == null) {
+            cityList = new ArrayList<>();
             loaddata(context);
         }
         return findCity(cityname);
@@ -69,11 +76,22 @@ public class CityLoader {
     }
 
     public static List<CityData> getCityList(Context context) {
-        if (citylist == null) {
-            citylist = new ArrayList<>();
+        if (cityList == null) {
+            cityList = new ArrayList<>();
             loaddata(context);
         }
-        return citylist;
+        return cityList;
+    }
+
+    public static List<CityData> getFavorCityList(Context context) {
+        getCityList(context);
+        List<CityData> favorCityList = new ArrayList<>();
+        for (CityData cityData :
+                cityList) {
+            if (cityData.isFavoriteCity())
+                favorCityList.add(cityData);
+        }
+        return favorCityList;
     }
 
     public static String getDefaultCityName(Context context) {

@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainlayout"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:layout_gravity="center"
-    android:columnCount="5"
-    android:rowCount="1"
-    android:orientation="vertical">
+    android:orientation="horizontal">
     <TextView
         android:id="@+id/cityNameTextView"
-        android:layout_gravity="fill"
-        android:layout_marginStart="10dp"
         android:textColor="@color/colorWhite"
-        android:layout_columnSpan="4"/>
+        android:gravity="left|center"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:layout_marginStart="20dp"
+        android:layout_height="match_parent"/>
 
     <ImageView
         android:id="@+id/citySmallImageView"
-        android:layout_gravity="end"
-         android:layout_height="25dp"
-        android:layout_columnSpan="1"
-        android:layout_marginEnd="10dp"
-        app:srcCompat="@drawable/kweather" />
-</GridLayout>
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_gravity="center"/>
+</LinearLayout>

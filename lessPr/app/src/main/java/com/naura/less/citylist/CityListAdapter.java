@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,19 +28,33 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
     private List<CityData> cityDataList;
     private LayoutInflater layoutInflater;
     private Context context;
-    private int currentPosition=-1;
+    private int currentPosition = -1;
+    private Boolean cardMode = false;
     private Observable observable = Observable.getInstance();
 
-    public CityListAdapter(Context context, List<CityData> cityDataList) {
+    public CityListAdapter(Context context, List<CityData> cityDataList, Boolean cardMode) {
         this.cityDataList = cityDataList;
         this.layoutInflater = LayoutInflater.from(context);
         this.context = context;
+        this.cardMode = cardMode;
+    }
+
+    public void setCityDataList(List<CityData> cityDataList) {
+        this.cityDataList = cityDataList;
     }
 
     @NonNull
     @Override
     public CityListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.city_item, parent, false);
+        context = parent.getContext();
+        View view;
+        if (cardMode) {
+            view = LayoutInflater.from(context)
+                    .inflate(R.layout.city_item_card, parent, false);
+        } else {
+            view = LayoutInflater.from(context)
+                    .inflate(R.layout.city_item, parent, false);
+        }
         return new ViewHolder(view);
     }
 
@@ -46,9 +62,17 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CityData cityData = cityDataList.get(position);
         holder.cityNameTextView.setText(cityData.getName());
-        holder.citySmallImageView.setImageBitmap(cityData.getSmallImage());
+        if (cityData.isFavoriteCity()) {
+            holder.citySmallImageView.setBackground(context.getResources().getDrawable(R.drawable.like_red));
+        } else
+            holder.citySmallImageView.setBackground(context.getResources().getDrawable(R.drawable.like_brown));
+        if (cardMode) {
+            holder.bigImage.setImageBitmap(cityData.getVerticalImage());
+            holder.citySmallImageView.setBackground(context.getResources().getDrawable(R.drawable.like_red));
+        }
+
         SetOnClickHolder(holder, position);
-        repaintView(holder,position);
+        repaintView(holder, position);
     }
 
     @Override
@@ -63,8 +87,8 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
 
     private void openCityList(Activity activity, String cityName) {
         CityLoader.setDefaultCityName(cityName);
-         observable=Observable.getInstance();
-         observable.notify(EventsConst.selectCityEvent, cityName);
+        observable = Observable.getInstance();
+        observable.notify(EventsConst.selectCityEvent, cityName);
         if (activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             return;
         }
@@ -73,13 +97,16 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
         activity.startActivity(intentcity);
     }
 
-    private void SetOnClickHolder(@NonNull final ViewHolder  holder, final int position) {
+    private void SetOnClickHolder(@NonNull final ViewHolder holder, final int position) {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 holder.cityNameTextView = view.findViewById(R.id.cityNameTextView);
                 holder.citySmallImageView = view.findViewById(R.id.citySmallImageView);
-                currentPosition=position;
+                if (cardMode) {
+                    holder.bigImage = view.findViewById(R.id.cityBigImageView);
+                }
+                currentPosition = position;
                 notifyDataSetChanged();
                 Activity activity = (Activity) context;
                 openCityList(activity, holder.cityNameTextView.getText().toString());
@@ -90,18 +117,35 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView cityNameTextView;
         ImageView citySmallImageView;
+        ImageView bigImage;
+        CardView cityCardView;
 
         ViewHolder(View view) {
             super(view);
             cityNameTextView = view.findViewById(R.id.cityNameTextView);
             citySmallImageView = view.findViewById(R.id.citySmallImageView);
+            citySmallImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String cityName = cityNameTextView.getText().toString();
+                    CityLoader.SetlikeCity(cityName);
+                    observable.notify(EventsConst.likeSelectEvent, cityName);
+                    //    Toast.makeText(context, cityNameTextView.getText().toString(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            if (cardMode) {
+                bigImage = view.findViewById(R.id.cityBigImageView);
+            }
         }
     }
 
     private void repaintView(@NonNull ViewHolder holder, int position) {
-       int color= ContextCompat.getColor(context, android.R.color.transparent);
-      if (currentPosition==position)
-        color= ContextCompat.getColor(context, R.color.colorPrimary);
-       holder.itemView.setBackgroundColor(color);
+        if (!cardMode) {
+            int color = ContextCompat.getColor(context, android.R.color.transparent);
+            if (currentPosition == position)
+                color = ContextCompat.getColor(context, R.color.colorGrid);
+            holder.itemView.setBackgroundColor(color);
+        }
     }
 }
