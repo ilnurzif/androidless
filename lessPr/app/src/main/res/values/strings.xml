@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Theather app</string>
+    <string name="airhumidity">airhumidity</string>
+    <string name="theather">theather</string>
+    <string name="weekforecast">weekforecast</string>
+    <string name="moscow">moscow</string>
+    <string name="Monday">mn</string>
+    <string name="Tuesday">tu</string>
+    <string name="Wednesday">wed</string>
+    <string name="Thursday">thu</string>
+    <string name="Saturday">sat</string>
+    <string name="Sunday">sun</string>
+    <string name="entercity">enter city name</string>
+    <string name="searchviewsettingtitle">search view setting</string>
+    <string name="windspeedtext">wind speed</string>
+    <string name="pressure">pressure</string>
+    <string name="findcity">findcity</string>
+    <string name="appsettigstitle">App settings</string>
+    <string name="applang">App lang</string>
+    <string name="themetitle">Dark theme</string>
+    <string name="title_activity_city_list">Select city</string>
+    <string name="Moscow">Moscow</string>
+    <string name="Kazan">Kazan</string>
+    <string name="favorite_city_title">Favorite city</string>
+    <string name="all_city_title">All city</string>
+    <string name="Yes_const">Да</string>
+    <string name="city_add_question">City will do added fovorite category</string>
+    <string name="myname">Ilnur Zagyrtdinov  ilnurzif@gmail.com +79256696944</string>
+    <string name="title_setting">App settings</string>
+    <string name="title_about">About</string>
+    <string name="app_theme">Тема приложения</string>
+    <string name="darkThemeTitle">Темная тема</string>
+    <string name="appThemeTitle">Светлая тема</string>
+</resources>
