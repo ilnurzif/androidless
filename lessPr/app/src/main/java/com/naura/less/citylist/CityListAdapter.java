@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -127,10 +129,17 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
             citySmallImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String cityName = cityNameTextView.getText().toString();
+                    final String cityName = cityNameTextView.getText().toString();
                     CityLoader.SetlikeCity(cityName);
-                    observable.notify(EventsConst.likeSelectEvent, cityName);
-                    //    Toast.makeText(context, cityNameTextView.getText().toString(), Toast.LENGTH_LONG).show();
+                    BottomNavigationView bottomBar = ((Activity) context).findViewById(R.id.nav_view);
+                    Snackbar.make(citySmallImageView, R.string.city_add_question, Snackbar.LENGTH_LONG).
+                            setAction(R.string.Yes_const, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    observable.notify(EventsConst.likeSelectEvent, cityName);
+                                }
+                            }).setAnchorView(bottomBar)
+                            .show();
                 }
             });
 

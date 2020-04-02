@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.naura.less.R;
+import com.naura.less.appsettings.BaseActivity;
 import com.naura.less.citylist.CityLoader;
+import com.naura.less.observercode.EventsConst;
+import com.naura.less.observercode.Observer;
 
-public class CityDetailActivity extends AppCompatActivity {
+public class CityDetailActivity extends BaseActivity implements Observer {
     private Toolbar toolbar;
     private LinearLayout mainLayout;
 
@@ -42,5 +44,12 @@ public class CityDetailActivity extends AppCompatActivity {
             mainLayout.setBackground(drawable);
         else
             mainLayout.setBackground(new BitmapDrawable(cityData.getHorisontalImage()));
+    }
+
+    @Override
+    public <T> void update(String eventName, T val) {
+        if (eventName.equals(EventsConst.selectCityEvent)) {
+            dataLoad((String) val);
+        }
     }
 }

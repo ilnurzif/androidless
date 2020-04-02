@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">less1Pr</string>
+    <string name="app_name">Погода</string>
     <string name="airhumidity">Влажность</string>
     <string name="theather">Погода</string>
     <string name="weekforecast">Прогноз на три дня</string>
@@ -21,4 +21,11 @@
     <string name="title_activity_city_list">Выбирете город</string>
     <string name="Moscow">Москва</string>
     <string name="Kazan">Казань</string>
+    <string name="favorite_city_title">Избранные города</string>
+    <string name="all_city_title">Все города</string>
+    <string name="Yes_const">Да</string>
+    <string name="city_add_question">Город будет добавлен/удален в избранное</string>
+    <string name="myname">Ильнур Загыртдинов ilnurzif@gmail.com +79256696944</string>
+    <string name="title_setting">Настройки приложения</string>
+    <string name="title_about">О разработчике</string>
 </resources>

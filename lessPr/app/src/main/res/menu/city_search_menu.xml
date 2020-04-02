@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/city_info"
+        android:id="@+id/settings"
         app:showAsAction="always"
-        android:icon="@android:drawable/ic_menu_info_details"
-        android:title="@string/findcity" />
+        android:icon="@drawable/settings"
+        android:title="Настройки" />
     <item
-        android:id="@+id/select_city"
+        android:id="@+id/about"
         app:showAsAction="always"
-        android:icon="@android:drawable/ic_input_add"
-        android:title="@string/findcity" />
+        android:icon="@drawable/human"
+        android:title="О разработчике" />
 </menu>

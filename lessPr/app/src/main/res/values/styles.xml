@@ -1,16 +1,25 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MyTheme" parent="Theme.AppCompat.DayNight">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AddStylee" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">#3C3F41</item>
+        <item name="colorPrimaryDark">#00ACC1</item>
+        <item name="colorAccent">@color/design_default_color_primary</item>
+    </style>
+
+    <style name="AppDarkTheme" parent="Theme.MaterialComponents">
+
+    </style>
+
+    <style name="bigTextTheme" parent="AddStylee">
+        <item name="android:textSize">90sp</item>
+        <item name="android:textColor">@color/colorGrid</item>
     </style>
 
     <style name="Toolbar">

@@ -31,8 +31,7 @@
             android:layout_weight="7"
             android:layout_marginStart="@dimen/textview_marginStart"
             android:text="10°"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/big_textsize" />
+              android:theme="@style/bigTextTheme"/>
        </LinearLayout>
 
         <LinearLayout

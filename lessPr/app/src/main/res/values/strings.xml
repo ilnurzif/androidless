@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">less1Pr</string>
+    <string name="app_name">Theather app</string>
     <string name="airhumidity">airhumidity</string>
     <string name="theather">theather</string>
     <string name="weekforecast">weekforecast</string>
@@ -21,6 +21,14 @@
     <string name="title_activity_city_list">Select city</string>
     <string name="Moscow">Moscow</string>
     <string name="Kazan">Kazan</string>
-    <string name="favorite_city_title">Избранные города</string>
-    <string name="all_city_title">Все города</string>
+    <string name="favorite_city_title">Favorite city</string>
+    <string name="all_city_title">All city</string>
+    <string name="Yes_const">Да</string>
+    <string name="city_add_question">City will do added fovorite category</string>
+    <string name="myname">Ilnur Zagyrtdinov  ilnurzif@gmail.com +79256696944</string>
+    <string name="title_setting">App settings</string>
+    <string name="title_about">About</string>
+    <string name="app_theme">Тема приложения</string>
+    <string name="darkThemeTitle">Темная тема</string>
+    <string name="appThemeTitle">Светлая тема</string>
 </resources>

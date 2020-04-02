@@ -1,29 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mainlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/moscowsity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/Toolbar" />   
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@color/colorBlack"
-            android:textColor="@color/colorWhite"
-            android:text="@string/favorite_city_title" />
-        <fragment
-            android:id="@+id/favor_city"
-            android:name="com.naura.less.citylist.CityListFavorFragment"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"/>
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
@@ -39,5 +19,5 @@
             android:name="com.naura.less.citylist.CityListFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="20"/>
+            android:layout_weight="5"/>
 </LinearLayout>

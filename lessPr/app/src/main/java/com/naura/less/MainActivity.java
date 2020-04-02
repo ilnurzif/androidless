@@ -1,39 +1,31 @@
 package com.naura.less;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.res.Configuration;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import android.widget.LinearLayout;
 
+import com.naura.less.appsettings.BaseActivity;
 import com.naura.less.observercode.EventsConst;
 import com.naura.less.observercode.Observable;
 import com.naura.less.observercode.Observer;
 import com.naura.less.citydetail.CityData;
 import com.naura.less.citylist.CityLoader;
 
-
-public class MainActivity extends AppCompatActivity implements Observer {
-    private Toolbar toolbar;
-    private LinearLayout mainLayout;
+public class MainActivity extends BaseActivity implements Observer {
+    private androidx.coordinatorlayout.widget.CoordinatorLayout mainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.city_choice);
+        setContentView(R.layout.city);
         initVisual();
         dataLoad(CityLoader.getDefaultCityName(this));
     }
 
     private void initVisual() {
-        toolbar = findViewById(R.id.toolbar);
-        toolbar.setSubtitle(R.string.title_activity_city_list);
         mainLayout = findViewById(R.id.mainlayout);
-
         Observable observable = Observable.getInstance();
         observable.subscribe(this);
     }
@@ -46,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
     }
 
     private void dataLoad(String cityName) {
-        toolbar.setSubtitle(cityName);
         CityData cityData = CityLoader.getCity(this, cityName);
         Drawable drawable = new BitmapDrawable(cityData.getVerticalImage());
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)

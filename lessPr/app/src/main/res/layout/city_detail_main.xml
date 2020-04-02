@@ -6,7 +6,6 @@
     android:id="@+id/mainlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/moscowsity"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -16,7 +15,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="6">
         <fragment
             android:id="@+id/cities"
             android:name="com.naura.less.citydetail.CityDetailFragment"
@@ -24,6 +24,5 @@
             android:layout_height="match_parent"
             />
     </FrameLayout>
-
 </LinearLayout>
     
