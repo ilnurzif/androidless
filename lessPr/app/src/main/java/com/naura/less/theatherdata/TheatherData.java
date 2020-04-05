@@ -4,27 +4,33 @@ import java.io.Serializable;
 
 public class TheatherData implements Serializable {
     private String temperature;
-    private String weekday;
+    private String date;
     private String airhumidity;
     private int theathericon;
+    private String description;
 
     public String getTemperature() {
         return temperature;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public String getAirhumidity() {
         return airhumidity;
     }
 
-    public TheatherData(String temperature, String pressure, String airhumidity, String weekday, int theathericon) {
+    public TheatherData(String temperature, String pressure, String airhumidity, String date, String description, int theathericon) {
         this.temperature = temperature;
-        this.weekday = weekday;
+        this.date = date;
         this.theathericon = theathericon;
         this.airhumidity = airhumidity;
+        this.description=description;
     }
 
-    public String getWeekday() {
-        return weekday;
+    public String getDay() {
+        return date;
     }
 
     public int getTheathericon() {
@@ -36,7 +42,7 @@ public class TheatherData implements Serializable {
     }
 
     public void setWeekday(String weekday) {
-        this.weekday = weekday;
+        this.date = weekday;
     }
 
     public void setTheatherIcon(int theatherIcon) {

@@ -23,6 +23,10 @@ public class TheatherWeekAdapter extends RecyclerView.Adapter<TheatherWeekAdapte
         this.inflater = LayoutInflater.from(context);
     }
 
+    public void setTheatherDays(List<TheatherData> theatherDays) {
+        this.theatherDays = theatherDays;
+    }
+
     @NonNull
     @Override
     public TheatherWeekAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,7 +39,8 @@ public class TheatherWeekAdapter extends RecyclerView.Adapter<TheatherWeekAdapte
         TheatherData theatherDay = theatherDays.get(position);
         holder.weatherView.setImageResource(theatherDay.getTheathericon());
         holder.temperatureView.setText(theatherDay.getTemperature());
-        holder.weekdayView.setText(theatherDay.getWeekday());
+        holder.weekdayView.setText(theatherDay.getDay());
+        holder.descriptionView.setText(theatherDay.getDescription());
     }
 
     @Override
@@ -45,13 +50,14 @@ public class TheatherWeekAdapter extends RecyclerView.Adapter<TheatherWeekAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView weatherView;
-        final TextView weekdayView, temperatureView;
+        final TextView weekdayView, temperatureView, descriptionView;
 
         ViewHolder(View view) {
             super(view);
             weatherView = view.findViewById(R.id.weathericon);
             weekdayView = view.findViewById(R.id.weekday);
             temperatureView = view.findViewById(R.id.temperature);
+            descriptionView = view.findViewById(R.id.description);
         }
     }
 }

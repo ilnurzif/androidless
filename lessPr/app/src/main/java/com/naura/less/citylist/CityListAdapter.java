@@ -33,12 +33,14 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
     private int currentPosition = -1;
     private Boolean cardMode = false;
     private Observable observable = Observable.getInstance();
+    private CityLoader cityLoader;
 
     public CityListAdapter(Context context, List<CityData> cityDataList, Boolean cardMode) {
         this.cityDataList = cityDataList;
         this.layoutInflater = LayoutInflater.from(context);
         this.context = context;
         this.cardMode = cardMode;
+        this.cityLoader = OpenWeatherMapLoader.getInstance(context);
     }
 
     public void setCityDataList(List<CityData> cityDataList) {
@@ -88,7 +90,7 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
     }
 
     private void openCityList(Activity activity, String cityName) {
-        CityLoader.setDefaultCityName(cityName);
+        cityLoader.setDefaultCityName(cityName);
         observable = Observable.getInstance();
         observable.notify(EventsConst.selectCityEvent, cityName);
         if (activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -130,7 +132,7 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     final String cityName = cityNameTextView.getText().toString();
-                    CityLoader.SetlikeCity(cityName);
+                    cityLoader.SetlikeCity(cityName);
                     BottomNavigationView bottomBar = ((Activity) context).findViewById(R.id.nav_view);
                     Snackbar.make(citySmallImageView, R.string.city_add_question, Snackbar.LENGTH_LONG).
                             setAction(R.string.Yes_const, new View.OnClickListener() {

@@ -24,6 +24,7 @@ public class CityListFavorFragment extends Fragment implements Observer {
     private List<CityData> favorCityList;
     private RecyclerView recyclerView;
     private CityListAdapter cityListAdapter;
+    private CityLoader cityLoader;
 
     @Nullable
     @Override
@@ -39,10 +40,7 @@ public class CityListFavorFragment extends Fragment implements Observer {
     }
 
     private void dataLoad() {
-        Observable observable = Observable.getInstance();
-        observable.subscribe(this);
-
-        favorCityList = CityLoader.getFavorCityList(getContext());
+        favorCityList = cityLoader.getFavorCityList();
         cityListAdapter = new CityListAdapter(getContext(), favorCityList, true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -53,12 +51,15 @@ public class CityListFavorFragment extends Fragment implements Observer {
     private void initVisual(View view) {
         recyclerView = view.findViewById(R.id.citiesRecyclerView);
         recyclerView.setBackgroundColor(getContext().getResources().getColor(R.color.colorGrid));
+        Observable observable = Observable.getInstance();
+        observable.subscribe(this);
+        this.cityLoader = OpenWeatherMapLoader.getInstance(getContext());
     }
 
     @Override
     public <T> void update(String eventName, T val) {
         if (eventName.equals(EventsConst.likeSelectEvent)) {
-            cityListAdapter.setCityDataList(CityLoader.getFavorCityList(getContext()));
+            cityListAdapter.setCityDataList(cityLoader.getFavorCityList());
             cityListAdapter.notifyDataSetChanged();
         }
     }

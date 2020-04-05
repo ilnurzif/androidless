@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 
 import com.naura.less.appsettings.BaseActivity;
+import com.naura.less.citylist.OpenWeatherMapLoader;
 import com.naura.less.observercode.EventsConst;
 import com.naura.less.observercode.Observable;
 import com.naura.less.observercode.Observer;
@@ -15,19 +16,20 @@ import com.naura.less.citylist.CityLoader;
 
 public class MainActivity extends BaseActivity implements Observer {
     private androidx.coordinatorlayout.widget.CoordinatorLayout mainLayout;
+    private CityLoader cityLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.city);
         initVisual();
-        dataLoad(CityLoader.getDefaultCityName(this));
     }
 
     private void initVisual() {
         mainLayout = findViewById(R.id.mainlayout);
         Observable observable = Observable.getInstance();
         observable.subscribe(this);
+        cityLoader = OpenWeatherMapLoader.getInstance(this);
     }
 
     @Override
@@ -38,7 +40,7 @@ public class MainActivity extends BaseActivity implements Observer {
     }
 
     private void dataLoad(String cityName) {
-        CityData cityData = CityLoader.getCity(this, cityName);
+        CityData cityData = cityLoader.getCity(cityName);
         Drawable drawable = new BitmapDrawable(cityData.getVerticalImage());
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
             mainLayout.setBackground(drawable);

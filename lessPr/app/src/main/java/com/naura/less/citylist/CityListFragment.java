@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,7 @@ public class CityListFragment extends Fragment implements Observer {
     private List<CityData> cityList;
     private RecyclerView recyclerView;
     private CityListAdapter cityListAdapter;
+    private CityLoader cityLoader;
 
     @Nullable
     @Override
@@ -42,12 +44,13 @@ public class CityListFragment extends Fragment implements Observer {
     private void initVisual(View view) {
         cityList = new ArrayList<>();
         recyclerView = view.findViewById(R.id.citiesRecyclerView);
+        Observable observable = Observable.getInstance();
+        observable.subscribe(this);
+        cityLoader = OpenWeatherMapLoader.getInstance(getActivity());
     }
 
     private void dataLoad() {
-        Observable observable = Observable.getInstance();
-        observable.subscribe(this);
-        cityList = CityLoader.getCityList(getActivity());
+        cityList = cityLoader.getCityList();
         cityListAdapter = new CityListAdapter(getActivity(), cityList, false);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
@@ -60,7 +63,7 @@ public class CityListFragment extends Fragment implements Observer {
     @Override
     public <T> void update(String eventName, T val) {
         if (eventName.equals(EventsConst.likeSelectEvent)) {
-            cityListAdapter.setCityDataList(CityLoader.getCityList(getContext()));
+            cityListAdapter.setCityDataList(cityLoader.getCityList());
             cityListAdapter.notifyDataSetChanged();
         }
     }

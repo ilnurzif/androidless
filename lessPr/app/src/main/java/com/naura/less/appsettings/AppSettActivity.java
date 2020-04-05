@@ -42,21 +42,19 @@ public class AppSettActivity extends BaseActivity implements Observer {
         applySettfloatingActionButton.setOnClickListener(new View.OnClickListener() {
                                                              @Override
                                                              public void onClick(View v) {
-                                                                 switch (spinner.getSelectedItemPosition()) {
-                                                                     case 0:
-                                                                         setDarkTheme(true);
-                                                                         observable.notify(EventsConst.themeReloadEvent, null);
-                                                                         openMain();
-                                                                         return;
-                                                                     case 1:
-                                                                         setDarkTheme(false);
-                                                                         observable.notify(EventsConst.themeReloadEvent, null);
-                                                                         openMain();
-                                                                         return;
-                                                                 }
-
-                                                             }
-                                                         }
+         switch (spinner.getSelectedItemPosition()) {
+            case 0:
+             setDarkTheme(true);
+             observable.notify(EventsConst.themeReloadEvent, null);
+             openMain();
+             return;
+           case 1:
+             setDarkTheme(false);
+             observable.notify(EventsConst.themeReloadEvent, null);
+             openMain();
+             return;
+           }
+          }                                                         }
         );
 
         observable = Observable.getInstance();

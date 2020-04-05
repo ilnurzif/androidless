@@ -1,10 +1,12 @@
 package com.naura.less.citydetail;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naura.less.R;
+import com.naura.less.citylist.OpenWeatherMapLoader;
 import com.naura.less.observercode.EventsConst;
 import com.naura.less.observercode.Observable;
 import com.naura.less.observercode.Observer;
@@ -28,6 +31,7 @@ public class CityDetailFragment extends Fragment implements Observer {
     private TextView airhumidityTextView;
     private List<TheatherData> theatherDays = new ArrayList<>();
     private TheatherWeekAdapter adapter;
+    private CityLoader cityLoader;
 
     @Nullable
     @Override
@@ -39,7 +43,6 @@ public class CityDetailFragment extends Fragment implements Observer {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
-        dataLoad(CityLoader.getDefaultCityName(getActivity()));
     }
 
     private void initViews(View view) {
@@ -49,22 +52,27 @@ public class CityDetailFragment extends Fragment implements Observer {
 
         Observable observable = Observable.getInstance();
         observable.subscribe(this);
+
+        cityLoader = OpenWeatherMapLoader.getInstance(getActivity());
+        cityLoader.startLoad();
     }
 
-    private void dataLoad(String cityName) {
-        theatherDays = CityLoader.getTheatherData(getActivity(), cityName);
-        adapter = new TheatherWeekAdapter(getActivity(), theatherDays);
-        recyclerView.setAdapter(adapter);
+    private void dataLoad(String cityName, List<TheatherData> theatherDays) {
+        if (adapter == null) {
+            adapter = new TheatherWeekAdapter(getActivity(), theatherDays);
+            recyclerView.setAdapter(adapter);
+        } else {
+            adapter.setTheatherDays(theatherDays);
+            adapter.notifyDataSetChanged();
+        }
 
-        CityData cityData = CityLoader.getCity(getActivity(), cityName);
-        if (cityData == null)
-            throw new NullPointerException("city " + cityName + " not found");
-        CityLoader.setDefaultCityName(cityName);
-
-        String temperatureNow = cityData.getTemperatureNow() + "°";
-        String airhumidity = getResources().getText(R.string.airhumidity) + " " + cityData.getAirhumidityNow() + " %";
-
+        String temperatureNow = theatherDays.get(0).getTemperature();
         temperatureTextView.setText(temperatureNow);
+
+        String airhumidity = theatherDays.get(0).getAirhumidity();
+        airhumidity = "Влажность " + airhumidity;
+        airhumidity = airhumidity;
+
         airhumidityTextView.setText(airhumidity);
     }
 
@@ -81,9 +89,13 @@ public class CityDetailFragment extends Fragment implements Observer {
     @Override
     public <T> void update(String eventName, T val) {
         if (eventName.equals(EventsConst.selectCityEvent)) {
-            CityLoader.setDefaultCityName((String) val);
+            cityLoader.setDefaultCityName((String) val);
+            cityLoader.startLoad();
             if (getActivity() == null) return;
-            dataLoad(CityLoader.getDefaultCityName(getActivity()));
+        }
+        if (eventName.equals(EventsConst.cityLoadFinish)) {
+            List<TheatherData> cityTheatherList = (List<TheatherData>) val;
+            dataLoad(cityLoader.getDefaultCityName(), cityTheatherList);
         }
     }
 }

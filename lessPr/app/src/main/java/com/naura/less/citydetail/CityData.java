@@ -10,6 +10,7 @@ import com.naura.less.theatherdata.TheatherData;
 import java.util.List;
 
 public class CityData {
+    private String key;
     private String name;
     private List<TheatherData> theatherDays;
     private Bitmap verticalImage;
@@ -26,12 +27,15 @@ public class CityData {
         this.favoriteCity = favoriteCity;
     }
 
-    public CityData(String name, List<TheatherData> theatherDays,
+    public CityData(String key,
+                    String name,
+                    List<TheatherData> theatherDays,
                     Bitmap verticalImage,
                     Bitmap horisontalImage,
                     Bitmap smallImage,
                     String infoUrl) {
 
+        this.key = key;
         this.name = name;
         this.verticalImage = verticalImage;
         this.horisontalImage = horisontalImage;
@@ -40,18 +44,22 @@ public class CityData {
         this.infoUrl = infoUrl;
     }
 
+    public String getKey() {
+        return key;
+    }
+
     public Bitmap getSmallImage() {
         return smallImage;
     }
 
-    public int getTemperatureNow() {
+    public String getTemperatureNow() {
         String st = theatherDays.get(0).getTemperature();
-        return Integer.parseInt(st);
+        return st;
     }
 
-    public int getAirhumidityNow() {
+    public String getAirhumidityNow() {
         String st = theatherDays.get(0).getAirhumidity();
-        return Integer.parseInt(st);
+        return st;
     }
 
     public String getName() {

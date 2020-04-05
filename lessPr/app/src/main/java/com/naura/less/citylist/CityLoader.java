@@ -3,51 +3,75 @@ package com.naura.less.citylist;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.naura.less.R;
 import com.naura.less.citydetail.CityData;
+import com.naura.less.observercode.Observable;
 import com.naura.less.theatherdata.TheatherData;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CityLoader {
-    static private List<CityData> cityList;
-    static private String defaultCityName = "";
+    protected Context context;
+    protected List<CityData> cityList;
+    private String defaultCityName = "";
+    private String defaultKey = "";
+    private static CityLoader cityLoader;
+    protected Observable observable;
 
-    private static void loaddata(Context context) {
-        context.getString(R.string.Moscow);
-        List<TheatherData> moscowTheatherList = new ArrayList<>();
-
-        moscowTheatherList.add(new TheatherData("10", "748", "48", context.getString(R.string.Monday), R.drawable.kweather));
-        moscowTheatherList.add(new TheatherData("13", "766", "33", context.getString(R.string.Thursday), R.drawable.kweather));
-        moscowTheatherList.add(new TheatherData("17", "700", "56", context.getString(R.string.Saturday), R.drawable.kweather));
-
-        cityList.add(new CityData(context.getString(R.string.Moscow),
-                moscowTheatherList,
-                ResToBitmap(context, R.drawable.moscowsity),
-                ResToBitmap(context, R.drawable.moscowhorizont),
-                ResToBitmap(context, R.drawable.kazan_small),
-                "https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0"));
-
-        List<TheatherData> kazanTheatherList = new ArrayList<>();
-        kazanTheatherList.add(new TheatherData("17", "700", "33", context.getString(R.string.Monday), R.drawable.kweather));
-        kazanTheatherList.add(new TheatherData("16", "666", "66", context.getString(R.string.Thursday), R.drawable.kweather));
-        kazanTheatherList.add(new TheatherData("17", "744", "38", context.getString(R.string.Saturday), R.drawable.kweather));
-
-        cityList.add(new CityData(context.getString(R.string.Kazan),
-                kazanTheatherList,
-                ResToBitmap(context, R.drawable.kazanvertical),
-                ResToBitmap(context, R.drawable.kazanhorizontal),
-                ResToBitmap(context, R.drawable.kazan_small),
-                "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D0%BD%D1%8C"));
+    public String getDefaultKey() {
+        return defaultKey;
     }
 
-    private static Bitmap ResToBitmap(Context context, int resid) {
+    private void loaddata() {
+        context.getString(R.string.Moscow);
+
+        cityList = new ArrayList<>();
+
+        List<TheatherData> kazanTheatherList = new ArrayList<>();
+        cityList.add(new CityData(
+                "Kazan",
+                context.getString(R.string.Kazan),
+                kazanTheatherList,
+                ResToBitmap(R.drawable.kazanvertical),
+                ResToBitmap(R.drawable.kazanhorizontal),
+                ResToBitmap(R.drawable.kazan_small),
+                "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D0%BD%D1%8C"));
+
+        List<TheatherData> moscowTheatherList = new ArrayList<>();
+        cityList.add(new CityData("Moscow", context.getString(R.string.Moscow),
+                moscowTheatherList,
+                ResToBitmap(R.drawable.moscowsity),
+                ResToBitmap(R.drawable.moscowhorizont),
+                ResToBitmap(R.drawable.kazan_small),
+                "https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0"));
+    }
+
+
+    protected CityLoader(Context context) {
+        this.context = context;
+        observable = Observable.getInstance();
+    }
+
+    public void startLoad() {
+    }
+
+    protected Bitmap ResToBitmap(int resid) {
         return BitmapFactory.decodeResource(context.getResources(), resid);
     }
 
-    private static CityData findCity(String cityname) {
+    private CityData findCity(String cityname) {
         for (CityData cd : cityList) {
             if (cd.getName().equals(cityname))
                 return cd;
@@ -55,36 +79,36 @@ public class CityLoader {
         return null;
     }
 
-    public static void SetlikeCity(String cityName) {
+    public void SetlikeCity(String cityName) {
         for (CityData cityData : cityList) {
             if (cityData.getName().equals(cityName))
                 cityData.setFavoriteCity(!cityData.isFavoriteCity());
         }
     }
 
-    public static CityData getCity(Context context, String cityname) {
+    public CityData getCity(String cityname) {
         if (cityList == null) {
             cityList = new ArrayList<>();
-            loaddata(context);
+            loaddata();
         }
         return findCity(cityname);
     }
 
-    public static List<TheatherData> getTheatherData(Context context, String cityname) {
-        CityData cityData = getCity(context, cityname);
+    public List<TheatherData> getTheatherData(Context context, String cityname) {
+        CityData cityData = getCity(cityname);
         return (cityData == null) ? null : cityData.getTheatherDays();
     }
 
-    public static List<CityData> getCityList(Context context) {
+    public List<CityData> getCityList() {
         if (cityList == null) {
             cityList = new ArrayList<>();
-            loaddata(context);
+            loaddata();
         }
         return cityList;
     }
 
-    public static List<CityData> getFavorCityList(Context context) {
-        getCityList(context);
+    public List<CityData> getFavorCityList() {
+        getCityList();
         List<CityData> favorCityList = new ArrayList<>();
         for (CityData cityData :
                 cityList) {
@@ -94,13 +118,17 @@ public class CityLoader {
         return favorCityList;
     }
 
-    public static String getDefaultCityName(Context context) {
+    public String getDefaultCityName() {
         if (defaultCityName.equals(""))
-            defaultCityName = context.getString(R.string.Moscow);
+            defaultCityName = context.getString(R.string.Kazan);
         return defaultCityName;
     }
 
-    public static void setDefaultCityName(String cityName) {
+    public void setDefaultCityName(String cityName) {
         defaultCityName = cityName;
+        for (CityData cityData : cityList) {
+            if (cityData.getName().equals(cityName))
+                defaultKey = cityData.getKey();
+        }
     }
 }
